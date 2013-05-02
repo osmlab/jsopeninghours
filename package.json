@@ -1,0 +1,16 @@
+{
+    "name": "jsopeninghours",
+    "version": "0.0.0",
+    "description": "extract opening hours information from text",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "devDependencies": {
+        "mocha": "~1.8",
+        "expect.js": "~0.2.0"
+    },
+    "repository": "",
+    "author": "Ian Dees <ian.dees@gmail.com>",
+    "license": "BSD"
+}
