@@ -26,6 +26,9 @@ describe('Opening Hours parser', function() {
         it('should not return anything with unparseable data', function() {
             expect(jsoh("whenever I feel like it, damnit!")).to.eql(null);
         });
+        it('should not return anything with not quite parseable data', function() {
+            expect(jsoh("9:15 - 21:15, Mon-Sat")).to.eql(null);
+        });
     });
     describe('one range of days', function() {
         it('should be open weekdays 8:30am to 8:00pm', function() {
