@@ -21,7 +21,7 @@ module.exports = function(text) {
         var dayranges = text.toLowerCase().split(';');
         for (var i = 0; i < dayranges.length; i++) {
             var dayrange = dayranges[i],
-                daytimes = dayrange.split(' ');
+                daytimes = dayrange.trim().split(' ');
 
             var left = daytimes[0].split('-'),
                 right = null;
