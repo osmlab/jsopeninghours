@@ -42,7 +42,7 @@ module.exports = function(text) {
                     result[days[j]] = [right[0], right[1]];
                 }
             }
-            console.log(result);
         }
     }
+    return result;
 };
