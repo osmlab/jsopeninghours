@@ -2,7 +2,10 @@ var days = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su'];
 
 module.exports = function(text) {
     var result = null;
-    if (text == '24/7') {
+    if (text === '' || text === null) {
+        result = null;
+    }
+    else if (text == '24/7') {
         result = {'24/7': true};
     }
     else if (text == 'seasonal') {
