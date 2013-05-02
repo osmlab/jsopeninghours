@@ -16,6 +16,17 @@ describe('Opening Hours parser', function() {
             });
         });
     });
+    describe('garbage data', function() {
+        it('should not return anything with no data', function() {
+            expect(jsoh("")).to.eql(null);
+        });
+        it('should not return anything with unparseable data', function() {
+            expect(jsoh("special arrangement")).to.eql(null);
+        });
+        it('should not return anything with unparseable data', function() {
+            expect(jsoh("whenever I feel like it, damnit!")).to.eql(null);
+        });
+    });
     describe('one range of days', function() {
         it('should be open weekdays 8:30am to 8:00pm', function() {
             expect(jsoh("Mo-Fr 08:30-20:00")).to.eql({
