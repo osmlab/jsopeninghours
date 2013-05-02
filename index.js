@@ -1,14 +1,15 @@
 var days = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su'];
 
 module.exports = function(text) {
+    var result = null;
     if (text == '24/7') {
-        return {'24/7': true};
+        result = {'24/7': true};
     }
     else if (text == 'seasonal') {
-        return {'seasonal': true};
+        result = {'seasonal': true};
     }
     else {
-        var result = {};
+        result = {};
         for (var k = 0; k < days.length; k++) {
             result[days[k]] = null;
         }
@@ -19,7 +20,7 @@ module.exports = function(text) {
                 daytimes = dayrange.split(' ');
 
             var left = daytimes[0].split('-'),
-                right;
+                right = null;
             if (daytimes.length === 2) {
                 right = daytimes[1].split('-');
             }
@@ -37,6 +38,11 @@ module.exports = function(text) {
                 endday = days.indexOf(left[1]);
             }
 
+            if (right === null) {
+                // If the right side is null then the left side contains
+                // the times for the entire week.
+                right = left;
+            }
             if (right.length === 2) {
                 for (var j = startday; j <= endday; j++) {
                     result[days[j]] = [right[0], right[1]];
