@@ -13,6 +13,7 @@ module.exports = function(text) {
     }
     else {
         result = {};
+        var modified_some_days = false;
         for (var k = 0; k < days.length; k++) {
             result[days[k]] = null;
         }
@@ -46,10 +47,16 @@ module.exports = function(text) {
                 // the times for the entire week.
                 right = left;
             }
+
             if (right.length === 2) {
                 for (var j = startday; j <= endday; j++) {
                     result[days[j]] = [right[0], right[1]];
+                    modified_some_days = true;
                 }
+            }
+
+            if (!modified_some_days) {
+                result = null;
             }
         }
     }
