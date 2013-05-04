@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Opening Hours Parser</title>
+    <meta charset='utf-8' />
+    <link rel='stylesheet' href='css/style.css' />
+    <script src="./index.js"></script>
+</head>
+    <body>
+        <div class='col6 pad1'>
+            <h1>Opening Hours Parser</h1>
+            <p>Parses an OpenStreetMap <code>opening_hours</code> tag value and returns it in
+               a JavaScript object.</p>
+            <p>The goal is <em>not</em> to parse every possible value but to parse enough
+               to be useful while not destroying existing data.</p>
+            <p>If you spot a value that doesn't work like you expect, please
+                <a href='https://github.com/osmlab/jsopeninghours/issues/new'>file a bug</a>.</p>
+
+            <label for='opening_hours'>opening_hours</label>
+            <input class='col4' type='text' id='opening_hours' onKeyUp='handleKeypress();' placeholder='Mo-Fr 09:00-17:00'></input>
+
+            <div class='col12'>
+                <span class='col4'><strong>Monday</strong></span>
+                <input type='text' style='text-align:right; width:20%;' class='col4' align='right' id='mo_open'></input>
+                <input type='text' style='width:20%' class='col4' id='mo_close'></input>
+            </div>
+            <div class='col12'>
+                <span class='col4'><strong>Tuesday</strong></span>
+                <input type='text' style='text-align:right; width:20%;' class='col4' align='right' id='tu_open'></input>
+                <input type='text' style='width:20%' class='col4' id='tu_close'></input>
+            </div>
+            <div class='col12'>
+                <span class='col4'><strong>Wednesday</strong></span>
+                <input type='text' style='text-align:right; width:20%;' class='col4' align='right' id='we_open'></input>
+                <input type='text' style='width:20%' class='col4' id='we_close'></input>
+            </div>
+            <div class='col12'>
+                <span class='col4'><strong>Thursday</strong></span>
+                <input type='text' style='text-align:right; width:20%;' class='col4' align='right' id='th_open'></input>
+                <input type='text' style='width:20%' class='col4' id='th_close'></input>
+            </div>
+            <div class='col12'>
+                <span class='col4'><strong>Friday</strong></span>
+                <input type='text' style='text-align:right; width:20%;' class='col4' align='right' id='fr_open'></input>
+                <input type='text' style='width:20%' class='col4' id='fr_close'></input>
+            </div>
+            <div class='col12'>
+                <span class='col4'><strong>Saturday</strong></span>
+                <input type='text' style='text-align:right; width:20%;' class='col4' align='right' id='sa_open'></input>
+                <input type='text' style='width:20%' class='col4' id='sa_close'></input>
+            </div>
+            <div class='col12'>
+                <span class='col4'><strong>Sunday</strong></span>
+                <input type='text' style='text-align:right; width:20%;' class='col4' align='right' id='su_open'></input>
+                <input type='text' style='width:20%' class='col4' id='su_close'></input>
+            </div>
+        </div>
+        <script type='text/javascript'>
+        var input = document.getElementById('opening_hours'),
+            mo_open = document.getElementById('mo_open'),
+            mo_close = document.getElementById('mo_close'),
+            tu_open = document.getElementById('tu_open'),
+            tu_close = document.getElementById('tu_close'),
+            we_open = document.getElementById('we_open'),
+            we_close = document.getElementById('we_close'),
+            th_open = document.getElementById('th_open'),
+            th_close = document.getElementById('th_close'),
+            fr_open = document.getElementById('fr_open'),
+            fr_close = document.getElementById('fr_close'),
+            sa_open = document.getElementById('sa_open'),
+            sa_close = document.getElementById('sa_close'),
+            su_open = document.getElementById('su_open'),
+            su_close = document.getElementById('su_close'),
+            handleKeypress = function() {
+                var text = input.value;
+                if (text === "") { return; }
+
+                var oh = jsopeninghours.compute(text);
+
+                if (oh === null) { return; }
+
+                mo_open.value = oh.mo ? oh.mo[0] : "-";
+                mo_close.value = oh.mo ? oh.mo[1] : "-";
+                tu_open.value = oh.tu ? oh.tu[0] : "-";
+                tu_close.value = oh.tu ? oh.tu[1] : "-";
+                we_open.value = oh.we ? oh.we[0] : "-";
+                we_close.value = oh.we ? oh.we[1] : "-";
+                th_open.value = oh.th ? oh.th[0] : "-";
+                th_close.value = oh.th ? oh.th[1] : "-";
+                fr_open.value = oh.fr ? oh.fr[0] : "-";
+                fr_close.value = oh.fr ? oh.fr[1] : "-";
+                sa_open.value = oh.sa ? oh.sa[0] : "-";
+                sa_close.value = oh.sa ? oh.sa[1] : "-";
+                su_open.value = oh.su ? oh.su[0] : "-";
+                su_close.value = oh.su ? oh.su[1] : "-";
+
+            };
+        </script>
+    </body>
+</html>
