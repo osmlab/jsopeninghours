@@ -17,42 +17,42 @@
                 <a href='https://github.com/osmlab/jsopeninghours/issues/new'>file a bug</a>.</p>
 
             <label for='opening_hours'>opening_hours</label>
-            <input class='col4' type='text' id='opening_hours' onKeyUp='handleKeypress();' placeholder='Mo-Fr 09:00-17:00'></input>
+            <input class='col4' type='text' id='opening_hours' onKeyUp='handleInputChange();' placeholder='Mo-Fr 09:00-17:00'></input>
 
             <div class='col12'>
                 <span class='col4'><strong>Monday</strong></span>
-                <input type='text' style='text-align:right; width:20%;' class='col4' align='right' id='mo_open'></input>
-                <input type='text' style='width:20%' class='col4' id='mo_close'></input>
+                <input type='text' style='text-align:right; width:20%;' align='right' id='mo_open' disabled></input>
+                <input type='text' style='width:20%' id='mo_close' disabled></input>
             </div>
             <div class='col12'>
                 <span class='col4'><strong>Tuesday</strong></span>
-                <input type='text' style='text-align:right; width:20%;' class='col4' align='right' id='tu_open'></input>
-                <input type='text' style='width:20%' class='col4' id='tu_close'></input>
+                <input type='text' style='text-align:right; width:20%;' align='right' id='tu_open' disabled></input>
+                <input type='text' style='width:20%' id='tu_close' disabled></input>
             </div>
             <div class='col12'>
                 <span class='col4'><strong>Wednesday</strong></span>
-                <input type='text' style='text-align:right; width:20%;' class='col4' align='right' id='we_open'></input>
-                <input type='text' style='width:20%' class='col4' id='we_close'></input>
+                <input type='text' style='text-align:right; width:20%;' align='right' id='we_open' disabled></input>
+                <input type='text' style='width:20%' id='we_close' disabled></input>
             </div>
             <div class='col12'>
                 <span class='col4'><strong>Thursday</strong></span>
-                <input type='text' style='text-align:right; width:20%;' class='col4' align='right' id='th_open'></input>
-                <input type='text' style='width:20%' class='col4' id='th_close'></input>
+                <input type='text' style='text-align:right; width:20%;' align='right' id='th_open' disabled></input>
+                <input type='text' style='width:20%' id='th_close' disabled></input>
             </div>
             <div class='col12'>
                 <span class='col4'><strong>Friday</strong></span>
-                <input type='text' style='text-align:right; width:20%;' class='col4' align='right' id='fr_open'></input>
-                <input type='text' style='width:20%' class='col4' id='fr_close'></input>
+                <input type='text' style='text-align:right; width:20%;' align='right' id='fr_open' disabled></input>
+                <input type='text' style='width:20%' id='fr_close' disabled></input>
             </div>
             <div class='col12'>
                 <span class='col4'><strong>Saturday</strong></span>
-                <input type='text' style='text-align:right; width:20%;' class='col4' align='right' id='sa_open'></input>
-                <input type='text' style='width:20%' class='col4' id='sa_close'></input>
+                <input type='text' style='text-align:right; width:20%;' align='right' id='sa_open' disabled></input>
+                <input type='text' style='width:20%' id='sa_close' disabled></input>
             </div>
             <div class='col12'>
                 <span class='col4'><strong>Sunday</strong></span>
-                <input type='text' style='text-align:right; width:20%;' class='col4' align='right' id='su_open'></input>
-                <input type='text' style='width:20%' class='col4' id='su_close'></input>
+                <input type='text' style='text-align:right; width:20%;' align='right' id='su_open' disabled></input>
+                <input type='text' style='width:20%' id='su_close' disabled></input>
             </div>
         </div>
         <script type='text/javascript'>
@@ -71,7 +71,7 @@
             sa_close = document.getElementById('sa_close'),
             su_open = document.getElementById('su_open'),
             su_close = document.getElementById('su_close'),
-            handleKeypress = function() {
+            handleInputChange = function() {
                 var text = input.value;
                 if (text === "") { return; }
 
@@ -79,21 +79,36 @@
 
                 if (oh === null) { return; }
 
-                mo_open.value = oh.mo ? oh.mo[0] : "-";
-                mo_close.value = oh.mo ? oh.mo[1] : "-";
-                tu_open.value = oh.tu ? oh.tu[0] : "-";
-                tu_close.value = oh.tu ? oh.tu[1] : "-";
-                we_open.value = oh.we ? oh.we[0] : "-";
-                we_close.value = oh.we ? oh.we[1] : "-";
-                th_open.value = oh.th ? oh.th[0] : "-";
-                th_close.value = oh.th ? oh.th[1] : "-";
-                fr_open.value = oh.fr ? oh.fr[0] : "-";
-                fr_close.value = oh.fr ? oh.fr[1] : "-";
-                sa_open.value = oh.sa ? oh.sa[0] : "-";
-                sa_close.value = oh.sa ? oh.sa[1] : "-";
-                su_open.value = oh.su ? oh.su[0] : "-";
-                su_close.value = oh.su ? oh.su[1] : "-";
+                mo_open.value = oh.mo ? oh.mo[0] : "";
+                mo_close.value = oh.mo ? oh.mo[1] : "";
+                tu_open.value = oh.tu ? oh.tu[0] : "";
+                tu_close.value = oh.tu ? oh.tu[1] : "";
+                we_open.value = oh.we ? oh.we[0] : "";
+                we_close.value = oh.we ? oh.we[1] : "";
+                th_open.value = oh.th ? oh.th[0] : "";
+                th_close.value = oh.th ? oh.th[1] : "";
+                fr_open.value = oh.fr ? oh.fr[0] : "";
+                fr_close.value = oh.fr ? oh.fr[1] : "";
+                sa_open.value = oh.sa ? oh.sa[0] : "";
+                sa_close.value = oh.sa ? oh.sa[1] : "";
+                su_open.value = oh.su ? oh.su[0] : "";
+                su_close.value = oh.su ? oh.su[1] : "";
 
+            },
+            handleOutputChange = function() {
+                var oh = {
+                    mo: [mo_open.value, mo_close.value],
+                    tu: [tu_open.value, tu_close.value],
+                    we: [we_open.value, we_close.value],
+                    th: [th_open.value, th_close.value],
+                    fr: [fr_open.value, fr_close.value],
+                    sa: [sa_open.value, sa_close.value],
+                    su: [su_open.value, su_close.value]
+                };
+
+                var value = jsopeninghours.build_value(oh);
+
+                console.log(value);
             };
         </script>
     </body>
