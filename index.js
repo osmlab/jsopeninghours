@@ -18,41 +18,51 @@ module.exports = function(text) {
             result[days[k]] = null;
         }
 
-        var dayranges = text.toLowerCase().split(';');
-        for (var i = 0; i < dayranges.length; i++) {
-            var dayrange = dayranges[i],
-                daytimes = dayrange.trim().split(' ');
+        var dayregex = /^(mo|tu|we|th|fr|sa|su)\-?(mo|tu|we|th|fr|sa|su)?$/,
+            timeregex = /^\s*(\d\d:\d\d)\-(\d\d:\d\d)\s*$/,
+            dayranges = text.toLowerCase().split(/\s*;\s*/),
+            dayrange;
+        while((dayrange = dayranges.shift())) {
+            var daytimes = dayrange.trim().split(/\s+/),
+                daytime,
+                startday = 0,
+                endday = 6,
+                whichDays,
+                whichTimes,
+                starttime,
+                endtime;
 
-            var left = daytimes[0].split('-'),
-                right = null;
-            if (daytimes.length === 2) {
-                right = daytimes[1].split('-');
-            }
+            while((daytime = daytimes.shift())) {
+                if (dayregex.test(daytime)) {
+                    var daymatches = daytime.match(dayregex);
 
-            var startday = 0,
-                endday = 6;
+                    if (daymatches.length === 3) {
+                        startday = days.indexOf(daymatches[1]);
+                        if (daymatches[2]) {
+                            endday = days.indexOf(daymatches[2]);
+                        } else {
+                            endday = startday;
+                        }
+                    } else {
+                        return null;
+                    }
+                } else if (timeregex.test(daytime)) {
+                    var timematches = daytime.match(timeregex);
 
-            if (days.indexOf(left[0]) >= 0) {
-                startday = days.indexOf(left[0]);
-            }
-            if (left.length === 1) {
-                endday = startday;
-            }
-            if (left.length === 2 && days.indexOf(left[1]) >= 0) {
-                endday = days.indexOf(left[1]);
-            }
-
-            if (right === null) {
-                // If the right side is null then the left side contains
-                // the times for the entire week.
-                right = left;
-            }
-
-            if (right.length === 2) {
-                for (var j = startday; j <= endday; j++) {
-                    result[days[j]] = [right[0], right[1]];
-                    modified_some_days = true;
+                    if (timematches.length === 3) {
+                        starttime = timematches[1];
+                        endtime = timematches[2];
+                    } else {
+                        return null;
+                    }
+                } else {
+                    return null;
                 }
+            }
+
+            for (var j = startday; j <= endday; j++) {
+                result[days[j]] = [starttime, endtime];
+                modified_some_days = true;
             }
 
             if (!modified_some_days) {
